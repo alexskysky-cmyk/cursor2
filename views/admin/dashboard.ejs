@@ -1,0 +1,80 @@
+<%- include('../partials/header') %>
+
+<h1 class="mb-4">Dashboard Admin</h1>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+	<h2 class="h4 m-0">Daftar Mobil</h2>
+	<a href="/admin/mobil/tambah" class="btn btn-success">+ Tambah Mobil</a>
+</div>
+<div class="table-responsive mb-5">
+	<table class="table table-striped align-middle">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Gambar</th>
+				<th>Nama</th>
+				<th>Merek</th>
+				<th>Harga/Hari</th>
+				<th>Aksi</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% cars.forEach(car => { %>
+				<tr>
+					<td><%= car.id %></td>
+					<td style="width:120px"><img src="<%= car.image_url %>" class="img-fluid rounded"/></td>
+					<td><%= car.name %></td>
+					<td><%= car.brand %></td>
+					<td>Rp <%= car.price_per_day.toLocaleString('id-ID') %></td>
+					<td>
+						<a class="btn btn-sm btn-primary" href="/admin/mobil/edit/<%= car.id %>">Edit</a>
+						<form method="POST" action="/admin/mobil/hapus/<%= car.id %>" class="d-inline" onsubmit="return confirm('Hapus mobil ini?')">
+							<button class="btn btn-sm btn-danger" type="submit">Hapus</button>
+						</form>
+					</td>
+				</tr>
+			<% }) %>
+		</tbody>
+	</table>
+</div>
+
+<h2 class="h4">Daftar Pesanan</h2>
+<div class="table-responsive">
+	<table class="table table-striped align-middle">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Nama Pemesan</th>
+				<th>Mobil</th>
+				<th>Tanggal Mulai</th>
+				<th>Tanggal Selesai</th>
+				<th>Status</th>
+				<th>Aksi</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% bookings.forEach(b => { %>
+				<tr>
+					<td><%= b.id %></td>
+					<td><%= b.customer_name %></td>
+					<td><%= b.car_name || '-' %></td>
+					<td><%= b.start_date %></td>
+					<td><%= b.end_date %></td>
+					<td><span class="badge bg-<%= b.status === 'Pending' ? 'warning text-dark' : (b.status === 'Dikonfirmasi' ? 'info' : 'success') %>"><%= b.status %></span></td>
+					<td>
+						<a class="btn btn-sm btn-primary" href="/admin/booking/edit/<%= b.id %>">Edit</a>
+						<form method="POST" action="/admin/booking/hapus/<%= b.id %>" class="d-inline" onsubmit="return confirm('Hapus pesanan ini?')">
+							<button class="btn btn-sm btn-danger" type="submit">Hapus</button>
+						</form>
+					</td>
+				</tr>
+			<% }) %>
+		</tbody>
+	</table>
+</div>
+
+<div class="mt-4">
+	<a class="btn btn-outline-secondary" href="/admin/pesan">Lihat Pesan Kontak</a>
+</div>
+
+<%- include('../partials/footer') %>

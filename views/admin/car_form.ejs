@@ -1,0 +1,41 @@
+<%- include('../partials/header') %>
+
+<h1 class="mb-4"><%= car ? 'Edit Mobil' : 'Tambah Mobil' %></h1>
+<div class="row">
+	<div class="col-md-8">
+		<div class="card shadow-sm">
+			<div class="card-body">
+				<form method="POST" action="<%= car ? ('/admin/mobil/edit/' + car.id) : '/admin/mobil/tambah' %>">
+					<div class="row">
+						<div class="col-md-6 mb-3">
+							<label class="form-label">Nama Mobil</label>
+							<input required type="text" name="name" value="<%= car ? car.name : '' %>" class="form-control" />
+						</div>
+						<div class="col-md-6 mb-3">
+							<label class="form-label">Merek</label>
+							<input required type="text" name="brand" value="<%= car ? car.brand : '' %>" class="form-control" />
+						</div>
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Harga per Hari</label>
+						<input required type="number" min="0" name="price_per_day" value="<%= car ? car.price_per_day : '' %>" class="form-control" />
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Deskripsi</label>
+						<textarea required name="description" rows="4" class="form-control"><%= car ? car.description : '' %></textarea>
+					</div>
+					<div class="mb-3">
+						<label class="form-label">URL Gambar</label>
+						<input required type="url" name="image_url" value="<%= car ? car.image_url : '' %>" class="form-control" />
+					</div>
+					<div class="d-flex gap-2">
+						<button class="btn btn-primary" type="submit"><%= car ? 'Simpan Perubahan' : 'Tambah Mobil' %></button>
+						<a class="btn btn-secondary" href="/admin/dashboard">Batal</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<%- include('../partials/footer') %>

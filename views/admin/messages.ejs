@@ -1,0 +1,29 @@
+<%- include('../partials/header') %>
+
+<h1 class="mb-4">Pesan Kontak</h1>
+<div class="table-responsive">
+	<table class="table table-striped align-middle">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Nama</th>
+				<th>Email</th>
+				<th>Pesan</th>
+				<th>Tanggal</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% messages.forEach(m => { %>
+				<tr>
+					<td><%= m.id %></td>
+					<td><%= m.name %></td>
+					<td><%= m.email %></td>
+					<td><%= m.message %></td>
+					<td><%= m.created_at %></td>
+				</tr>
+			<% }) %>
+		</tbody>
+	</table>
+</div>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,24 @@
+<%- include('partials/header') %>
+
+<% if (typeof query !== 'undefined' && query.success) { %>
+	<div class="alert alert-success">Pemesanan berhasil dikirim!</div>
+<% } %>
+
+<h1 class="mb-4">Daftar Mobil Tersedia</h1>
+<div class="row g-4">
+	<% cars.forEach(car => { %>
+		<div class="col-md-4">
+			<div class="card h-100 shadow-sm">
+				<img src="<%= car.image_url %>" class="card-img-top" alt="<%= car.name %>">
+				<div class="card-body d-flex flex-column">
+					<h5 class="card-title mb-1"><%= car.brand %> <%= car.name %></h5>
+					<p class="text-muted mb-2">Rp <%= car.price_per_day.toLocaleString('id-ID') %> / hari</p>
+					<p class="card-text flex-grow-1"><%= car.description %></p>
+					<a class="btn btn-primary mt-auto" href="/booking/<%= car.id %>">Pesan Sekarang</a>
+				</div>
+			</div>
+		</div>
+	<% }) %>
+</div>
+
+<%- include('partials/footer') %>
